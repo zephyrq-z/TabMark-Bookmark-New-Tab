@@ -63,13 +63,4 @@
     "default_path": "src/sidepanel.html",
     "default_width": 430
   },
-  "commands": {
-    "open_side_panel": {
-      "suggested_key": {
-        "default": "Alt+B",
-        "mac": "Command+B"
-      },
-      "description": "打开侧边栏"
-    }
-  }
 }

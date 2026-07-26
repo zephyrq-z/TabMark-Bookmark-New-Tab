@@ -337,21 +337,9 @@
 
   sidebarContainer.appendChild(searchSwitcher);
 
-  floatingButton.addEventListener('click', (event) => {
-    if (event.altKey) {
-      // Alt + 点击打开侧边栏
-      chrome.runtime.sendMessage({ 
-        action: 'openSidePanel'
-      }, (response) => {
-        if (chrome.runtime.lastError) {
-          console.error('Failed to open side panel:', chrome.runtime.lastError.message);
-        }
-      });
-    } else {
-      // 普通点击打开搜索面板
-      if (sidebarContainer) {
-        sidebarContainer.classList.remove('collapsed');
-      }
+  floatingButton.addEventListener('click', () => {
+    if (sidebarContainer) {
+      sidebarContainer.classList.remove('collapsed');
     }
   });
 

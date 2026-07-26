@@ -30,33 +30,6 @@ document.addEventListener('DOMContentLoaded', function() {
       }
     });
     
-    // 添加键盘快捷键监听
-    document.addEventListener('keydown', function(e) {
-      // Alt+Home 或 Alt+H 键回到主页
-      if ((e.altKey && e.key === 'Home') || (e.altKey && e.key === 'h')) {
-        e.preventDefault();
-        console.log('[Navigation Handler] Keyboard shortcut for home detected');
-        
-        // 直接调用Chrome API返回主页
-        try {
-          chrome.runtime.sendMessage({ 
-            action: 'navigateHome',
-            source: 'keyboard-shortcut',
-            timestamp: Date.now()
-          });
-        } catch(err) {
-          console.error('[Navigation Handler] Failed to trigger home navigation via keyboard:', err);
-        }
-      }
-      // Alt+Left箭头 - 后退
-      if (e.altKey && e.key === 'ArrowLeft') {
-        window.parent.postMessage({ action: 'navigateBack' }, '*');
-      }
-      // Alt+Right箭头 - 前进
-      else if (e.altKey && e.key === 'ArrowRight') {
-        window.parent.postMessage({ action: 'navigateForward' }, '*');
-      }
-    });
     
     // 监听页面内的链接点击
     document.addEventListener('click', function(e) {

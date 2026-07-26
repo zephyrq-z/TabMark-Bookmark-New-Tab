@@ -144,12 +144,6 @@ class SettingsManager {
       });
     }
     
-    // 添加键盘事件监听，按ESC关闭侧边栏
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape' && this.settingsSidebar && this.settingsSidebar.classList.contains('open')) {
-        this.closeSettingsSidebar();
-      }
-    });
 
     // 添加点击侧边栏外部关闭功能
     document.addEventListener('click', (e) => {

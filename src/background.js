@@ -1035,15 +1035,6 @@ function toggleSidePanel() {
   });
 }
 
-// 修改命令监听器使用切换功能
-chrome.commands.onCommand.addListener((command) => {
-  console.log(`Command received: ${command}`);
-  
-  if (command === "open_side_panel") {
-    console.log("Toggling side panel with shortcut");
-    toggleSidePanel();
-  }
-});
 
 // 添加扩展图标点击事件处理
 chrome.action.onClicked.addListener((tab) => {

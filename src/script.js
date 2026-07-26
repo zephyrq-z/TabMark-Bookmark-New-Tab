@@ -5836,60 +5836,6 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   });
 
-  // 处理键盘导航
-  searchInput.addEventListener('keydown', (e) => {
-    const items = searchSuggestions.querySelectorAll('li');
-    let index = Array.from(items).findIndex(item => item.classList.contains('keyboard-selected'));
-
-    switch (e.key) {
-      case 'ArrowDown':
-        e.preventDefault();
-        if (index < items.length - 1) index++;
-        break;
-      case 'ArrowUp':
-        e.preventDefault();
-        if (index > 0) index--;
-        break;
-      case 'Enter':
-        e.preventDefault();
-        if (e.metaKey || e.ctrlKey) {
-          // 处理 Cmd/Ctrl + Enter
-          const query = searchInput.value.trim();
-          if (query) {
-            openAllSearchEngines(query);
-          }
-        } else if (index !== -1) {
-          e.stopPropagation(); // 阻止事件冒泡
-          const selectedItem = items[index];
-          const suggestionType = selectedItem.getAttribute('data-type');
-          if (suggestionType === 'history' || suggestionType === 'bookmark') {
-            const url = selectedItem.getAttribute('data-url');
-            if (url) {
-              window.open(url, '_blank');
-              hideSuggestions();
-              return;
-            }
-          }
-          selectedItem.click();
-        } else {
-          performSearch(searchInput.value.trim());
-        }
-        return;
-      default:
-        return;
-    }
-
-    items.forEach(item => item.classList.remove('keyboard-selected'));
-    if (index !== -1) {
-      items[index].classList.add('keyboard-selected');
-      // 只在选择搜索建议时更新输入框的值
-      const selectedItem = items[index];
-      const suggestionType = selectedItem.getAttribute('data-type');
-      if (suggestionType === 'search') {
-        searchInput.value = selectedItem.querySelector('.suggestion-text').textContent;
-      }
-    }
-  })
 
   // 添加防抖函数
   function debounce(func, wait) {

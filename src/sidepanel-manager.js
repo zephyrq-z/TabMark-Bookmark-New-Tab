@@ -80,13 +80,6 @@ class SidePanelManager {
     document.getElementById('refresh-btn').addEventListener('click', () => this.refresh());
     document.getElementById('open-in-tab-btn').addEventListener('click', () => this.openInNewTab());
     
-    // URL 输入框事件
-    const urlInput = document.getElementById('url-input');
-    urlInput.addEventListener('keypress', (e) => {
-      if (e.key === 'Enter') {
-        this.loadUrl(urlInput.value);
-      }
-    });
     
     // 添加紧凑模式切换事件
     const toggleCompact = document.querySelector('.toggle-compact-btn');
