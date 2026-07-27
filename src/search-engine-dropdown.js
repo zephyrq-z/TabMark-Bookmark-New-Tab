@@ -361,9 +361,52 @@ function createSearchEngineDropdown() {
   }
 }
 
+// 紧凑模式：创建图标横排条
+function createCompactIconStrip() {
+  const iconContainer = document.querySelector('.search-icon-container');
+  if (!iconContainer) return;
+  
+  // 清除现有内容（保留第一个图标作为默认）
+  const defaultEngine = SearchEngineManager.getDefaultEngine();
+  const enabledEngines = SearchEngineManager.getEnabledEngines();
+  
+  // 清空容器
+  iconContainer.innerHTML = '';
+  
+  // 创建所有引擎图标
+  enabledEngines.forEach(engine => {
+    const img = document.createElement('img');
+    img.src = engine.icon;
+    img.alt = engine.label || engine.name;
+    img.title = engine.label || engine.name;
+    img.className = 'search-engine-icon';
+    if (engine.name === defaultEngine.name) {
+      img.classList.add('active-engine');
+    }
+    
+    img.addEventListener('click', (e) => {
+      e.stopPropagation();
+      // 切换激活状态
+      iconContainer.querySelectorAll('img').forEach(i => i.classList.remove('active-engine'));
+      img.classList.add('active-engine');
+      // 设置默认引擎
+      SearchEngineManager.setDefaultEngine(engine.name);
+      updateSearchEngineIcon(engine);
+    });
+    
+    iconContainer.appendChild(img);
+  });
+}
+
 // 新增下拉菜单 UI 创建函数
 function createDropdownUI() {
-  // 将原来 createSearchEngineDropdown 中的 UI 创建代码移到这里
+  // 检查是否为紧凑模式
+  const isCompact = document.documentElement.classList.contains('search-box-style-compact');
+  if (isCompact) {
+    createCompactIconStrip();
+    return;
+  }
+  
   const existingDropdown = document.querySelector('.search-engine-dropdown');
   if (existingDropdown) {
     existingDropdown.remove();

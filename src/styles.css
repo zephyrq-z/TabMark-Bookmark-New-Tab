@@ -2176,3 +2176,51 @@ body .default-folders-tabs.sidebar-expanded {
   background-color: rgba(255, 255, 255, 0.15);
   color: #e0e0e0;
 }
+
+/* ========================================
+   Search Box Compact Style
+   ======================================== */
+
+/* Compact mode: hide dropdown arrow */
+.search-box-style-compact .dropdown-indicator {
+  display: none !important;
+}
+
+/* Compact mode: search icon container becomes icon strip */
+.search-box-style-compact .search-icon-container {
+  display: flex;
+  flex-direction: row;
+  gap: 4px;
+  padding: 4px 8px;
+  overflow-x: auto;
+  max-width: 200px;
+}
+
+.search-box-style-compact .search-icon-container img {
+  width: 24px;
+  height: 24px;
+  flex-shrink: 0;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.search-box-style-compact .search-icon-container img:hover {
+  transform: scale(1.1);
+  box-shadow: 0 0 8px rgba(255, 45, 149, 0.4);
+}
+
+.search-box-style-compact .search-icon-container img.active-engine {
+  box-shadow: 0 0 8px var(--rog-pink, #ff2d95);
+  border: 2px solid var(--rog-pink, #ff2d95);
+}
+
+/* Compact mode: input has no left padding */
+.search-box-style-compact .search-input {
+  padding-left: 8px !important;
+}
+
+/* Compact mode: hide dropdown */
+.search-box-style-compact .search-engine-dropdown {
+  display: none !important;
+}

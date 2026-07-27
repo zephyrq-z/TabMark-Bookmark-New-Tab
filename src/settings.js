@@ -53,7 +53,9 @@ class SettingsManager {
     if (this.openInNewTabCheckbox || this.sidepanelOpenInNewTabCheckbox || this.sidepanelOpenInSidepanelCheckbox) {
       this.initLinkOpeningSettings();
     }
-    
+
+    this.initSearchBoxStyleSettings();
+
     // 检查书签管理相关元素
     const bookmarkCleanupButton = document.getElementById('open-bookmark-cleanup');
     if (bookmarkCleanupButton) {
@@ -450,6 +452,32 @@ class SettingsManager {
         chrome.storage.sync.set({ sidepanelOpenInNewTab: false });
       }
     });
+  }
+
+  initSearchBoxStyleSettings() {
+    const select = document.getElementById('search-box-style-select');
+    if (!select) return;
+
+    chrome.storage.sync.get(['searchBoxStyle'], (result) => {
+      const style = result.searchBoxStyle || 'expanded';
+      select.value = style;
+      this.applySearchBoxStyle(style);
+    });
+
+    select.addEventListener('change', () => {
+      const style = select.value;
+      chrome.storage.sync.set({ searchBoxStyle: style });
+      this.applySearchBoxStyle(style);
+    });
+  }
+
+  applySearchBoxStyle(style) {
+    const html = document.documentElement;
+    if (style === 'compact') {
+      html.classList.add('search-box-style-compact');
+    } else {
+      html.classList.remove('search-box-style-compact');
+    }
   }
 
   initBookmarkManagementTab() {
