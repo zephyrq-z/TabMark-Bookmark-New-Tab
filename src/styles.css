@@ -2181,60 +2181,48 @@ body .default-folders-tabs.sidebar-expanded {
    Search Box Enhanced Mode
    ======================================== */
 
-/* Mode 2: Enhanced aggregation mode */
+/* Mode 2: Two-layer layout - separate input and tabs */
 .search-box-style-enhanced .dropdown-indicator {
   display: none !important;
 }
 
+.search-box-style-enhanced .search-input-wrapper {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  padding: 12px 16px;
+  display: flex;
+  align-items: center;
+}
+
 .search-box-style-enhanced .search-input {
   padding-left: 12px !important;
-  padding-right: 40px !important;
+  border: none !important;
+  box-shadow: none !important;
+  background: transparent !important;
 }
 
-.search-box-style-enhanced .search-icon-container {
-  display: none !important;
-}
-
-.search-box-style-enhanced .search-send-btn {
-  display: flex !important;
-  position: absolute;
-  right: 8px;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 32px;
-  height: 32px;
-  border-radius: 50%;
-  background: linear-gradient(135deg, #ff2d95, #9b30ff);
-  color: white;
-  border: none;
-  cursor: pointer;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0 2px 8px rgba(255, 45, 149, 0.3);
-}
-
-.search-box-style-enhanced .search-send-btn:hover {
-  transform: translateY(-50%) scale(1.05);
-  box-shadow: 0 4px 12px rgba(255, 45, 149, 0.5);
-}
-
-.search-box-style-enhanced .search-send-btn .material-icons {
-  font-size: 18px;
-}
-
-/* Engine tabs bar */
+/* Engine tabs bar - separate block below input */
 .search-engine-tabs {
-  display: flex;
+  display: none;
   gap: 8px;
   margin-top: 12px;
   overflow-x: auto;
-  padding: 4px 0;
+  padding: 8px 12px;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
   scrollbar-width: none;
   -ms-overflow-style: none;
+  align-items: center;
 }
 
 .search-engine-tabs::-webkit-scrollbar {
   display: none;
+}
+
+.search-box-style-enhanced .search-engine-tabs {
+  display: flex !important;
 }
 
 .tabs-list {
@@ -2304,12 +2292,42 @@ body .default-folders-tabs.sidebar-expanded {
   color: #ff2d95;
 }
 
-[data-theme="dark"] .tab-engine {
+.tab-send-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #ff2d95, #9b30ff);
+  color: white;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(255, 45, 149, 0.3);
+  transition: all 0.2s;
+}
+
+.tab-send-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 12px rgba(255, 45, 149, 0.5);
+}
+
+.tab-send-btn .material-icons {
+  font-size: 16px;
+}
+
+/* Dark mode */
+[data-theme="dark"] .search-box-style-enhanced .search-input-wrapper,
+[data-theme="dark"] .search-engine-tabs {
   background: #27272a;
 }
 
-[data-theme="dark"] .tab-engine:hover {
+[data-theme="dark"] .tab-engine {
   background: #3f3f46;
+}
+
+[data-theme="dark"] .tab-engine:hover {
+  background: #52525b;
 }
 
 [data-theme="dark"] .tab-engine.active {
@@ -2317,10 +2335,10 @@ body .default-folders-tabs.sidebar-expanded {
 }
 
 [data-theme="dark"] .tab-more-btn {
-  background: #27272a;
+  background: #3f3f46;
   border-color: #52525b;
 }
 
 [data-theme="dark"] .tab-more-btn:hover {
-  background: #3f3f46;
+  background: #52525b;
 }

@@ -43,20 +43,22 @@
       <div class="flex justify-between items-center mb-4">
         <div class="search-container">
           <form class="search-form" id="search-form">
-            <div style="position: relative; height: auto;" class="search-input-wrapper">
+            <!-- 上层：纯输入框 -->
+            <div class="search-input-wrapper">
               <div class="search-icon-container" id="search-icon-container">
                 <img id="search-engine-icon" src="../images/placeholder-icon.svg" alt="search-engine-icon"
                   class="search-engine-icon">
                 <span class="dropdown-indicator" id="dropdown-indicator">▼</span>
               </div>
               <textarea class="search-input" data-i18n-placeholder="searchPlaceholder" rows="1" style="width: 100%; resize: none; padding-left: 40px;" id="search-input"></textarea>
-              <button type="button" id="search-send-btn" class="search-send-btn" style="display: none;">
-                <span class="material-icons">arrow_forward</span>
-              </button>
             </div>
+            <!-- 下层：独立横向标签栏 -->
             <div id="search-engine-tabs" class="search-engine-tabs" style="display: none;">
               <div class="tabs-list" id="tabs-list"></div>
               <button class="tab-more-btn" id="tab-more-btn" data-i18n="moreEngines">更多</button>
+              <button type="button" id="search-send-btn" class="tab-send-btn">
+                <span class="material-icons">arrow_forward</span>
+              </button>
             </div>
             <div class="search-suggestions-wrapper">
               <div class="line-container" id="line-container">

@@ -366,10 +366,11 @@ function createCompactIconStrip() {
   createEnhancedTabs();
 }
 
-// 增强模式：创建横向标签栏
+// 增强模式：创建横向标签栏（位于输入框下方独立区域）
 function createEnhancedTabs() {
   const tabsContainer = document.getElementById('search-engine-tabs');
   const tabsList = document.getElementById('tabs-list');
+  const sendBtn = document.getElementById('search-send-btn');
   if (!tabsContainer || !tabsList) return;
   
   const enabledEngines = SearchEngineManager.getEnabledEngines();
@@ -407,8 +408,22 @@ function createEnhancedTabs() {
     tabsList.appendChild(tab);
   });
   
-  // 显示标签栏
+  // 显示标签栏和发送按钮
   tabsContainer.style.display = 'flex';
+  if (sendBtn) sendBtn.style.display = 'flex';
+  
+  // 绑定发送按钮事件
+  if (sendBtn) {
+    sendBtn.onclick = () => {
+      const searchInput = document.getElementById('search-input');
+      const searchQuery = searchInput.value.trim();
+      if (searchQuery) {
+        const defaultEngine = SearchEngineManager.getDefaultEngine();
+        const searchUrl = getSearchUrl(defaultEngine.name, searchQuery);
+        window.open(searchUrl, '_blank');
+      }
+    };
+  }
 }
 
 // 新增下拉菜单 UI 创建函数
