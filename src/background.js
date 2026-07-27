@@ -13,28 +13,29 @@ chrome.runtime.onInstalled.addListener((details) => {
   }
 
   // 检查命令是否正确注册
-  chrome.commands.getAll((commands) => {
-    console.log("Registered commands:", commands);
-    
-    // 查找侧边栏命令
-    const sidePanelCommand = commands.find(cmd => cmd.name === "open_side_panel");
-    if (sidePanelCommand) {
-      console.log("Side panel command registered with shortcut:", sidePanelCommand.shortcut);
-    } else {
-      console.warn("Side panel command not found! Available commands:", commands.map(cmd => cmd.name).join(", "));
+  if (chrome.commands && chrome.commands.getAll) {
+    chrome.commands.getAll((commands) => {
+      console.log("Registered commands:", commands);
       
-      // 检查是否有其他可能的侧边栏命令
-      const alternativeCommand = commands.find(cmd => 
-        cmd.name === "_execute_action_with_ui" || 
-        cmd.name.includes("side") || 
-        cmd.name.includes("panel")
-      );
-      
-      if (alternativeCommand) {
-        console.log("Found alternative command that might be for side panel:", alternativeCommand);
+      // 查找侧边栏命令
+      const sidePanelCommand = commands.find(cmd => cmd.name === "open_side_panel");
+      if (sidePanelCommand) {
+        console.log("Side panel command registered with shortcut:", sidePanelCommand.shortcut);
+      } else {
+        console.warn("Side panel command not found! Available commands:", commands.map(cmd => cmd.name).join(", "));
+        
+        // 检查是否有其他可能的侧边栏命令
+        const alternativeCommand = commands.find(cmd => 
+          cmd.name === "_execute_action_with_ui" || 
+          cmd.name.includes("side") || 
+          cmd.name.includes("panel")
+        );
+        if (alternativeCommand) {
+          console.log("Found alternative command that might be for side panel:", alternativeCommand);
+        }
       }
-    }
-  });
+    });
+  }
   
   // 注册侧边栏导航内容脚本
   registerSidePanelNavigationScript();
