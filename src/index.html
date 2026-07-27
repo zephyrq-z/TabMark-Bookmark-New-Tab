@@ -7,6 +7,7 @@
   <link href="output.css" rel="stylesheet">
   <link href="styles.css" rel="stylesheet">
   <link href="sidepanel.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link rel="icon" type="image/png" href="../images/favicon.png">
   <style id="dynamic-background"></style>
   <script src="localization.js"></script>
@@ -51,14 +52,6 @@
                 <span class="dropdown-indicator" id="dropdown-indicator">▼</span>
               </div>
               <textarea class="search-input" data-i18n-placeholder="searchPlaceholder" rows="1" style="width: 100%; resize: none; padding-left: 40px;" id="search-input"></textarea>
-            </div>
-            <!-- 下层：独立横向标签栏 -->
-            <div id="search-engine-tabs" class="search-engine-tabs" style="display: none;">
-              <div class="tabs-list" id="tabs-list"></div>
-              <button class="tab-more-btn" id="tab-more-btn" data-i18n="moreEngines">更多</button>
-              <button type="button" id="search-send-btn" class="tab-send-btn">
-                <span class="material-icons">arrow_forward</span>
-              </button>
             </div>
             <div class="search-suggestions-wrapper">
               <div class="line-container" id="line-container">
@@ -218,14 +211,12 @@
                 <option value="auto" data-i18n="autoTheme">跟随系统</option>
               </select>
             </div>
-            
-            <!-- 搜索框样式选择 -->
-            <h4 class="settings-section-title" data-i18n="searchBoxStyleTitle">搜索框样式</h4>
-            <div class="search-box-style-section">
-              <select id="search-box-style-select" class="theme-select">
-                <option value="expanded" data-i18n="searchBoxStyleExpanded">展开（下拉选择）</option>
-                <option value="enhanced" data-i18n="searchBoxStyleEnhanced">增强（聚合面板）</option>
-              </select>
+
+
+            <h4 class="settings-section-title" data-i18n="layoutSpacingTitle">组件间距</h4>
+            <div class="slider-container" style="display: flex; align-items: center; gap: 10px;">
+              <input type="range" id="layout-spacing-slider" min="0" max="4" step="0.5" value="1" style="flex: 1;">
+              <div class="value-display" id="layout-spacing-value" style="white-space: nowrap; min-width: 40px;">1x</div>
             </div>
 
             <h4 class="settings-section-title" data-i18n="solidBackgroundTitle">纯色背景</h4>

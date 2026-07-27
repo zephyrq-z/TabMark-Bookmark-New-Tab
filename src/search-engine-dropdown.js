@@ -361,80 +361,8 @@ function createSearchEngineDropdown() {
   }
 }
 
-// 紧凑模式：创建图标横排条（已废弃，改用 enhanced）
-function createCompactIconStrip() {
-  createEnhancedTabs();
-}
-
-// 增强模式：创建横向标签栏（位于输入框下方独立区域）
-function createEnhancedTabs() {
-  const tabsContainer = document.getElementById('search-engine-tabs');
-  const tabsList = document.getElementById('tabs-list');
-  const sendBtn = document.getElementById('search-send-btn');
-  if (!tabsContainer || !tabsList) return;
-  
-  const enabledEngines = SearchEngineManager.getEnabledEngines();
-  const defaultEngine = SearchEngineManager.getDefaultEngine();
-  
-  // 清空标签列表
-  tabsList.innerHTML = '';
-  
-  // 创建所有引擎标签
-  enabledEngines.forEach(engine => {
-    const tab = document.createElement('div');
-    tab.className = 'tab-engine';
-    if (engine.name === defaultEngine.name) {
-      tab.classList.add('active');
-    }
-    
-    const img = document.createElement('img');
-    img.src = engine.icon;
-    img.alt = engine.label || engine.name;
-    tab.appendChild(img);
-    
-    const span = document.createElement('span');
-    span.textContent = engine.label || engine.name;
-    tab.appendChild(span);
-    
-    tab.addEventListener('click', () => {
-      // 切换激活状态
-      tabsList.querySelectorAll('.tab-engine').forEach(t => t.classList.remove('active'));
-      tab.classList.add('active');
-      // 设置默认引擎
-      SearchEngineManager.setDefaultEngine(engine.name);
-      updateSearchEngineIcon(engine);
-    });
-    
-    tabsList.appendChild(tab);
-  });
-  
-  // 显示标签栏和发送按钮
-  tabsContainer.style.display = 'flex';
-  if (sendBtn) sendBtn.style.display = 'flex';
-  
-  // 绑定发送按钮事件
-  if (sendBtn) {
-    sendBtn.onclick = () => {
-      const searchInput = document.getElementById('search-input');
-      const searchQuery = searchInput.value.trim();
-      if (searchQuery) {
-        const defaultEngine = SearchEngineManager.getDefaultEngine();
-        const searchUrl = getSearchUrl(defaultEngine.name, searchQuery);
-        window.open(searchUrl, '_blank');
-      }
-    };
-  }
-}
-
 // 新增下拉菜单 UI 创建函数
 function createDropdownUI() {
-  // 检查是否为增强模式
-  const isEnhanced = document.documentElement.classList.contains('search-box-style-enhanced');
-  if (isEnhanced) {
-    createEnhancedTabs();
-    return;
-  }
-  
   const existingDropdown = document.querySelector('.search-engine-dropdown');
   if (existingDropdown) {
     existingDropdown.remove();

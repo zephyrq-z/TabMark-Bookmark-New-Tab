@@ -980,6 +980,18 @@ function updateBookmarkCards() {
 }
 
 document.addEventListener('DOMContentLoaded', function () {
+  // 应用存储的组件间距
+  const savedSpacing = localStorage.getItem('layoutSpacing');
+  if (savedSpacing) {
+    document.documentElement.style.setProperty('--layout-spacing-scale', savedSpacing);
+  } else {
+    chrome.storage.sync.get(['layoutSpacing'], (result) => {
+      const scale = result.layoutSpacing !== undefined ? result.layoutSpacing : 1;
+      document.documentElement.style.setProperty('--layout-spacing-scale', scale);
+      localStorage.setItem('layoutSpacing', scale);
+    });
+  }
+
   // Create context menu immediately when the document loads
   contextMenu = createContextMenu();
   

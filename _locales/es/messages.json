@@ -37,7 +37,7 @@
     },
     "confirmDeleteMessage": {
         "message": "¿Estás seguro de que deseas eliminar \"$1\"?",
-        "description": "Mensaje para confirmar la eliminación de un elemento"
+        "description": "Mensaje de confirmación para eliminar un elemento"
     },
     "confirmDeleteButton": {
         "message": "Eliminar",
@@ -102,10 +102,6 @@
     "folderDeleted": {
         "message": "Carpeta eliminada: ID=$1, Título=$2",
         "description": "Mensaje de registro cuando se elimina una carpeta"
-    },
-    "confirmDeleteMessage": {
-        "message": "¿Estás seguro de que deseas eliminar \"$1\"?",
-        "description": "Mensaje de confirmación para eliminar un elemento"
     },
     "morningGreeting": {
         "message": "Buenos días👋",
@@ -768,5 +764,9 @@
     "presetWallpaperTitle": {
         "message": "Fondos predefinidos",
         "description": "Título para los fondos de pantalla predefinidos"
+    },
+    "layoutSpacingTitle": {
+        "message": "Espaciado de componentes",
+        "description": "Vertical spacing between components"
     }
 }

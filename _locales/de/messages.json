@@ -37,7 +37,7 @@
     },
     "confirmDeleteMessage": {
         "message": "Sind Sie sicher, dass Sie \"$1\" löschen möchten?",
-        "description": "Nachricht zur Bestätigung der Löschung eines Elements"
+        "description": "Bestätigungsnachricht zum Löschen eines Elements"
     },
     "confirmDeleteButton": {
         "message": "Löschen",
@@ -102,10 +102,6 @@
     "folderDeleted": {
         "message": "Ordner gelöscht: ID=$1, Titel=$2",
         "description": "Protokollnachricht, wenn ein Ordner gelöscht wird"
-    },
-    "confirmDeleteMessage": {
-        "message": "Sind Sie sicher, dass Sie \"$1\" löschen möchten?",
-        "description": "Bestätigungsnachricht zum Löschen eines Elements"
     },
     "morningGreeting": {
         "message": "Guten Morgen👋",
@@ -594,7 +590,7 @@
         "description": "Helles Design Option"
     },
     "darkTheme": {
-        "message": "Dunkel", 
+        "message": "Dunkel",
         "description": "Dunkles Design Option"
     },
     "autoTheme": {
@@ -714,8 +710,8 @@
         "description": "Grok Suchmaschinen-Label"
     },
     "searchBoxDisplayTitle": {
-            "message": "Suchfeld-Anzeige",
-            "description": "Titel für die Suchfeld-Anzeigeeinstellungen"
+        "message": "Suchfeld-Anzeige",
+        "description": "Titel für die Suchfeld-Anzeigeeinstellungen"
     },
     "shortcutsTab": {
         "message": "Tastenkombinationen",
@@ -796,5 +792,9 @@
     "presetWallpaperTitle": {
         "message": "Voreingestellte Hintergrundbilder",
         "description": "Titel für voreingestellte Hintergrundbilder"
+    },
+    "layoutSpacingTitle": {
+        "message": "Komponentenabstand",
+        "description": "Vertical spacing between components"
     }
 }

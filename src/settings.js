@@ -40,6 +40,7 @@ class SettingsManager {
     this.loadSavedSettings();
     this.initEventListeners();
     this.initTheme();
+    this.initLayoutSpacingSettings();
     
     // 只在相关元素存在时才调用各个初始化方法
     if (this.enableQuickLinksCheckbox) {
@@ -53,8 +54,6 @@ class SettingsManager {
     if (this.openInNewTabCheckbox || this.sidepanelOpenInNewTabCheckbox || this.sidepanelOpenInSidepanelCheckbox) {
       this.initLinkOpeningSettings();
     }
-
-    this.initSearchBoxStyleSettings();
 
     // 检查书签管理相关元素
     const bookmarkCleanupButton = document.getElementById('open-bookmark-cleanup');
@@ -332,6 +331,33 @@ class SettingsManager {
     }
   }
 
+  initLayoutSpacingSettings() {
+    const slider = document.getElementById('layout-spacing-slider');
+    const display = document.getElementById('layout-spacing-value');
+    if (!slider) return;
+
+    // 读取存储值，默认 1（1x）
+    chrome.storage.sync.get(['layoutSpacing'], (result) => {
+      const scale = result.layoutSpacing !== undefined ? result.layoutSpacing : 1;
+      slider.value = scale;
+      this.applyLayoutSpacing(scale);
+      if (display) display.textContent = scale + 'x';
+    });
+
+    // 监听滑块变化
+    slider.addEventListener('input', () => {
+      const scale = parseFloat(slider.value);
+      if (display) display.textContent = scale + 'x';
+      chrome.storage.sync.set({ layoutSpacing: scale });
+      localStorage.setItem('layoutSpacing', scale);
+      this.applyLayoutSpacing(scale);
+    });
+  }
+
+  applyLayoutSpacing(scale) {
+    document.documentElement.style.setProperty('--layout-spacing-scale', scale);
+  }
+
   setThemeBasedOnSystem() {
     const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
     const theme = isDarkMode ? 'dark' : 'light';
@@ -452,36 +478,6 @@ class SettingsManager {
         chrome.storage.sync.set({ sidepanelOpenInNewTab: false });
       }
     });
-  }
-
-  initSearchBoxStyleSettings() {
-    const select = document.getElementById('search-box-style-select');
-    if (!select) return;
-
-    chrome.storage.sync.get(['searchBoxStyle'], (result) => {
-      const style = result.searchBoxStyle || 'expanded';
-      select.value = style;
-      this.applySearchBoxStyle(style);
-    });
-
-    select.addEventListener('change', () => {
-      const style = select.value;
-      chrome.storage.sync.set({ searchBoxStyle: style });
-      this.applySearchBoxStyle(style);
-    });
-  }
-
-  applySearchBoxStyle(style) {
-    const html = document.documentElement;
-    if (style === 'enhanced') {
-      html.classList.add('search-box-style-enhanced');
-    } else {
-      html.classList.remove('search-box-style-enhanced');
-    }
-    // Re-initialize search engine UI
-    if (typeof createSearchEngineDropdown !== 'undefined') {
-      createSearchEngineDropdown();
-    }
   }
 
   initBookmarkManagementTab() {
