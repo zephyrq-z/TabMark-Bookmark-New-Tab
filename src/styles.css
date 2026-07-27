@@ -2126,3 +2126,53 @@ body .default-folders-tabs.sidebar-expanded {
     border-color: var(--primary-color, #10b981);
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
 }
+
+/* === 修复1: 设置面板深色模式 — 通用 .setting-option 覆盖 === */
+[data-theme="dark"] .setting-option {
+  background-color: #2d2d2d;
+}
+[data-theme="dark"] .setting-option:hover {
+  background-color: #363636;
+}
+
+/* === 修复2: 推荐网站名称 — 圆润文字背景胶囊 === */
+.quick-link-item-container span {
+  padding: 3px 10px;
+  border-radius: 12px;
+  background-color: rgba(0, 0, 0, 0.45);
+  color: #fff;
+  backdrop-filter: blur(12px) saturate(1.5);
+  -webkit-backdrop-filter: blur(12px) saturate(1.5);
+}
+[data-theme="dark"] .quick-link-item-container span {
+  background-color: rgba(255, 255, 255, 0.2);
+  color: #e0e0e0;
+}
+
+/* === 修复3: 顶部欢迎语 — 同款胶囊背景 === */
+#welcome-message {
+  padding: 4px 16px;
+  border-radius: 20px;
+  background-color: rgba(0, 0, 0, 0.35);
+  backdrop-filter: blur(16px) saturate(1.5);
+  -webkit-backdrop-filter: blur(16px) saturate(1.5);
+}
+[data-theme="dark"] #welcome-message {
+  background-color: rgba(255, 255, 255, 0.15);
+}
+
+/* === 修复3: 底部年份进度文字 — 同款胶囊背景 === */
+.year-progress span,
+.progress-percentage {
+  padding: 2px 10px;
+  border-radius: 12px;
+  background-color: rgba(0, 0, 0, 0.35);
+  color: #fff;
+  backdrop-filter: blur(12px) saturate(1.5);
+  -webkit-backdrop-filter: blur(12px) saturate(1.5);
+}
+[data-theme="dark"] .year-progress span,
+[data-theme="dark"] .progress-percentage {
+  background-color: rgba(255, 255, 255, 0.15);
+  color: #e0e0e0;
+}
