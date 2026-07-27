@@ -361,49 +361,62 @@ function createSearchEngineDropdown() {
   }
 }
 
-// 紧凑模式：创建图标横排条
+// 紧凑模式：创建图标横排条（已废弃，改用 enhanced）
 function createCompactIconStrip() {
-  const iconContainer = document.querySelector('.search-icon-container');
-  if (!iconContainer) return;
+  createEnhancedTabs();
+}
+
+// 增强模式：创建横向标签栏
+function createEnhancedTabs() {
+  const tabsContainer = document.getElementById('search-engine-tabs');
+  const tabsList = document.getElementById('tabs-list');
+  if (!tabsContainer || !tabsList) return;
   
-  // 清除现有内容（保留第一个图标作为默认）
-  const defaultEngine = SearchEngineManager.getDefaultEngine();
   const enabledEngines = SearchEngineManager.getEnabledEngines();
+  const defaultEngine = SearchEngineManager.getDefaultEngine();
   
-  // 清空容器
-  iconContainer.innerHTML = '';
+  // 清空标签列表
+  tabsList.innerHTML = '';
   
-  // 创建所有引擎图标
+  // 创建所有引擎标签
   enabledEngines.forEach(engine => {
+    const tab = document.createElement('div');
+    tab.className = 'tab-engine';
+    if (engine.name === defaultEngine.name) {
+      tab.classList.add('active');
+    }
+    
     const img = document.createElement('img');
     img.src = engine.icon;
     img.alt = engine.label || engine.name;
-    img.title = engine.label || engine.name;
-    img.className = 'search-engine-icon';
-    if (engine.name === defaultEngine.name) {
-      img.classList.add('active-engine');
-    }
+    tab.appendChild(img);
     
-    img.addEventListener('click', (e) => {
-      e.stopPropagation();
+    const span = document.createElement('span');
+    span.textContent = engine.label || engine.name;
+    tab.appendChild(span);
+    
+    tab.addEventListener('click', () => {
       // 切换激活状态
-      iconContainer.querySelectorAll('img').forEach(i => i.classList.remove('active-engine'));
-      img.classList.add('active-engine');
+      tabsList.querySelectorAll('.tab-engine').forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
       // 设置默认引擎
       SearchEngineManager.setDefaultEngine(engine.name);
       updateSearchEngineIcon(engine);
     });
     
-    iconContainer.appendChild(img);
+    tabsList.appendChild(tab);
   });
+  
+  // 显示标签栏
+  tabsContainer.style.display = 'flex';
 }
 
 // 新增下拉菜单 UI 创建函数
 function createDropdownUI() {
-  // 检查是否为紧凑模式
-  const isCompact = document.documentElement.classList.contains('search-box-style-compact');
-  if (isCompact) {
-    createCompactIconStrip();
+  // 检查是否为增强模式
+  const isEnhanced = document.documentElement.classList.contains('search-box-style-enhanced');
+  if (isEnhanced) {
+    createEnhancedTabs();
     return;
   }
   

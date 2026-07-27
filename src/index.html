@@ -43,13 +43,20 @@
       <div class="flex justify-between items-center mb-4">
         <div class="search-container">
           <form class="search-form" id="search-form">
-            <div style="position: relative;height: auto;">
-              <div class="search-icon-container">
+            <div style="position: relative; height: auto;" class="search-input-wrapper">
+              <div class="search-icon-container" id="search-icon-container">
                 <img id="search-engine-icon" src="../images/placeholder-icon.svg" alt="search-engine-icon"
                   class="search-engine-icon">
-                <span class="dropdown-indicator">▼</span>
+                <span class="dropdown-indicator" id="dropdown-indicator">▼</span>
               </div>
-              <textarea class="search-input" data-i18n-placeholder="searchPlaceholder" rows="1" style="width: 100%; resize: none; padding-left: 40px;"></textarea>
+              <textarea class="search-input" data-i18n-placeholder="searchPlaceholder" rows="1" style="width: 100%; resize: none; padding-left: 40px;" id="search-input"></textarea>
+              <button type="button" id="search-send-btn" class="search-send-btn" style="display: none;">
+                <span class="material-icons">arrow_forward</span>
+              </button>
+            </div>
+            <div id="search-engine-tabs" class="search-engine-tabs" style="display: none;">
+              <div class="tabs-list" id="tabs-list"></div>
+              <button class="tab-more-btn" id="tab-more-btn" data-i18n="moreEngines">更多</button>
             </div>
             <div class="search-suggestions-wrapper">
               <div class="line-container" id="line-container">
@@ -215,7 +222,7 @@
             <div class="search-box-style-section">
               <select id="search-box-style-select" class="theme-select">
                 <option value="expanded" data-i18n="searchBoxStyleExpanded">展开（下拉选择）</option>
-                <option value="compact" data-i18n="searchBoxStyleCompact">紧凑（图标横排）</option>
+                <option value="enhanced" data-i18n="searchBoxStyleEnhanced">增强（聚合面板）</option>
               </select>
             </div>
 

@@ -473,10 +473,14 @@ class SettingsManager {
 
   applySearchBoxStyle(style) {
     const html = document.documentElement;
-    if (style === 'compact') {
-      html.classList.add('search-box-style-compact');
+    if (style === 'enhanced') {
+      html.classList.add('search-box-style-enhanced');
     } else {
-      html.classList.remove('search-box-style-compact');
+      html.classList.remove('search-box-style-enhanced');
+    }
+    // Re-initialize search engine UI
+    if (typeof createSearchEngineDropdown !== 'undefined') {
+      createSearchEngineDropdown();
     }
   }
 
