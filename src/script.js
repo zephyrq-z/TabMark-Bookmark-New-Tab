@@ -1933,8 +1933,25 @@ function createBookmarkCard(bookmark, index) {
       console.log('[Bookmark Click] Starting...', {
         url: bookmark.url,
         isInternalUrl: isInternalUrl,
-        isSidePanel: isSidePanel
+        isSidePanel: isSidePanel,
+        isMetaOrCtrl: e.metaKey || e.ctrlKey
       });
+
+      // Command/Ctrl+Click: 在新标签页中打开，并停留在当前页面
+      if (e.metaKey || e.ctrlKey) {
+        console.log('[Bookmark Click] Command/Ctrl+Click detected, opening in new background tab');
+        chrome.tabs.create({
+          url: bookmark.url,
+          active: false
+        }).then(tab => {
+          console.log('[Bookmark Click] Background tab created successfully:', tab);
+        }).catch(error => {
+          console.error('[Bookmark Click] Failed to create background tab:', error);
+          // 降级方案：使用 window.open
+          window.open(bookmark.url, '_blank');
+        });
+        return;
+      }
 
       // 处理内部链接
       if (isInternalUrl) {

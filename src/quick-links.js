@@ -369,7 +369,7 @@ document.addEventListener('DOMContentLoaded', function () {
       // 修改点击事件处理
       link.addEventListener('click', async function(event) {
         event.preventDefault();
-        
+
         try {
           // 通过页面文件名判断环境
           const isSidePanel = window.location.pathname.endsWith('sidepanel.html');
@@ -377,8 +377,25 @@ document.addEventListener('DOMContentLoaded', function () {
           console.log('[Quick Link Click] Starting...', {
             url: site.url,
             currentUrl: window.location.href,
-            isSidePanel: isSidePanel
+            isSidePanel: isSidePanel,
+            isMetaOrCtrl: event.metaKey || event.ctrlKey
           });
+
+          // Command/Ctrl+Click: 在新标签页中打开，并停留在当前页面
+          if (event.metaKey || event.ctrlKey) {
+            console.log('[Quick Link Click] Command/Ctrl+Click detected, opening in new background tab');
+            chrome.tabs.create({
+              url: site.url,
+              active: false
+            }).then(tab => {
+              console.log('[Quick Link Click] Background tab created successfully:', tab);
+            }).catch(error => {
+              console.error('[Quick Link Click] Failed to create background tab:', error);
+              // 降级方案：使用 window.open
+              window.open(site.url, '_blank');
+            });
+            return;
+          }
 
           if (isSidePanel) {
             console.log('[Quick Link Click] Opening in Side Panel mode');
